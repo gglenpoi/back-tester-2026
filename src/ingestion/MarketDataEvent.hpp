@@ -16,6 +16,7 @@ enum class Action {
 struct MarketDataEvent {
     NanoTime timestamp{0};
     OrderId orderId{0};
+    SecurityId instrumentId;
     Side side{Side::None};
     Price price{0.0};
     Quantity size{0.0};

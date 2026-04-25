@@ -1,16 +1,8 @@
+set(TARGET back-tester-main)
+
 file(GLOB SRC CONFIGURE_DEPENDS *.cpp)
-list(REMOVE_ITEM SRC main.cpp)
 
-# static library
-set(TARGET back-tester-lib)
-add_library(${TARGET} STATIC ${SRC})
-target_link_libraries(${TARGET} PUBLIC
-    back-tester-common
-)
+add_executable(${TARGET} ${SRC})
+add_dependencies(${TARGET} GenerateVersion)
 
-# executable
-set(TARGET back-tester)
-add_executable(${TARGET} main.cpp)
-target_link_libraries(${TARGET} PUBLIC back-tester-lib)
-
-add_subdirectory(ingestion)
+target_link_libraries(${TARGET} PRIVATE back-tester-common)
